@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>サークル発表会 公式ページ</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <script defer src="scripts/main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第57回 演奏発表会</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>第57回演奏発表会</h1>
-    <nav>
-      <a href="index.html">ホーム</a>
-      <a href="event.html">発表会情報</a>
-      <a href="qanda.html">Q&A</a>
-    </nav>
+    <h1>第57回 演奏発表会</h1>
   </header>
 
   <main>
-    <section class="hero">
-      <h2>第57回演奏発表会のお知らせ</h2>
-      <p>📅 日時：2025年12月14日（日）16:30開場　17:00開演</p>
-      <p>📍 場所：川越南文化会館　ジョイフル</p>
-      <p>入場無料・予約不要！どなたでもご参加いただけます。</p>
-      <a href="event.html" class="button">詳細を見る</a>
+    <section class="hero fade-in">
+      <img src="第57回演奏発表会_ポスビラ絵 (1)_page-0001.jpg" alt="発表会イメージ">
     </section>
 
-    <section class="links">
-      <h3>関連リンク</h3>
-      <ul>
-        <li><a href="https://example.com" target="_blank">サークル公式紹介ページ</a></li>
-        <li><a href="qanda.html">よくある質問はこちら</a></li>
-      </ul>
+    <section class="countdown fade-in">
+      <h2>開催まであと</h2>
+      <div id="countdown-timer">読み込み中...</div>
+    </section>
+
+    <section class="info fade-in">
+      <div class="card">
+        <h2>開催情報</h2>
+        <p>📅 <strong>2025年12月14日（日）</strong></p>
+        <p>📍 <strong>川越南文化会館 ジョイフル</strong></p>
+      </div>
+
+      <a class="map-btn" href="https://www.google.com/maps/search/川越南文化会館ジョイフル" target="_blank">
+        Googleマップで見る
+      </a>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 サークル名 All Rights Reserved.</p>
+  <footer class="fade-in">
+    <p>© 第57回 演奏発表会</p>
+    <p>主催・お問い合わせ：後日掲載予定</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
