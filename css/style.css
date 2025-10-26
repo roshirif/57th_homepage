@@ -97,7 +97,7 @@ body {
 	font-family: "Murecho", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ", "Osaka", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;	/*フォント種類（ゴシック）*/
 	font-optical-sizing: auto;
 	-webkit-text-size-adjust: none;
-	background: #fff;	/*背景色*/
+	background: #C64691;	/*背景色*/
 	color: #777;		/*文字色*/
 	line-height: 2;		/*行間*/
 	overflow-x: hidden;
