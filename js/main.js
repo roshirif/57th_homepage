@@ -274,3 +274,102 @@ $(function() {
 		currentIndex = nextIndex;
 	}, 4000); // 4秒ごとにスライドを切り替える
 });
+
+
+
+//==============================
+// フリップ式カウントダウン
+//==============================
+
+// GSAP（TweenMax）を利用します
+// CDN読み込みがまだの場合は、HTMLの </body> 直前に以下を追加：
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  var Countdown = {
+    $el: $('.countdown'),
+    countdown_interval: null,
+    total_seconds: 0,
+
+    init: function() {
+      this.$ = {
+        days: this.$el.find('.bloc-time.days .figure'),
+        hours: this.$el.find('.bloc-time.hours .figure'),
+        minutes: this.$el.find('.bloc-time.min .figure'),
+        seconds: this.$el.find('.bloc-time.sec .figure')
+      };
+      this.updateTime();
+      this.count();
+    },
+
+    updateTime: function() {
+      const target = new Date("2025-12-14T17:00:00+09:00");
+      const now = new Date();
+      const diff = Math.max(0, target - now);
+
+      this.values = {
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60)
+      };
+      this.total_seconds = diff / 1000;
+    },
+
+    count: function() {
+      var that = this;
+      this.countdown_interval = setInterval(function() {
+        that.updateTime();
+        const { days, hours, minutes, seconds } = that.values;
+        that.checkHour(days, that.$.days.eq(0), that.$.days.eq(1));
+        that.checkHour(hours, that.$.hours.eq(0), that.$.hours.eq(1));
+        that.checkHour(minutes, that.$.minutes.eq(0), that.$.minutes.eq(1));
+        that.checkHour(seconds, that.$.seconds.eq(0), that.$.seconds.eq(1));
+
+        if (that.total_seconds <= 0) {
+          clearInterval(that.countdown_interval);
+        }
+      }, 1000);
+    },
+
+    animateFigure: function($el, value) {
+      var $top = $el.find('.top'),
+          $bottom = $el.find('.bottom'),
+          $back_top = $el.find('.top-back'),
+          $back_bottom = $el.find('.bottom-back');
+
+      $back_top.find('span').html(value);
+      $back_bottom.find('span').html(value);
+
+      TweenMax.to($top, 0.8, {
+        rotationX: '-180deg',
+        transformPerspective: 300,
+        ease: Quart.easeOut,
+        onComplete: function() {
+          $top.html(value);
+          $bottom.html(value);
+          TweenMax.set($top, { rotationX: 0 });
+        }
+      });
+
+      TweenMax.to($back_top, 0.8, {
+        rotationX: 0,
+        transformPerspective: 300,
+        ease: Quart.easeOut,
+        clearProps: 'all'
+      });
+    },
+
+    checkHour: function(value, $el_1, $el_2) {
+      var val_1 = value.toString().padStart(2, '0').charAt(0);
+      var val_2 = value.toString().padStart(2, '0').charAt(1);
+      var fig_1_value = $el_1.find('.top').html();
+      var fig_2_value = $el_2.find('.top').html();
+
+      if (fig_1_value !== val_1) this.animateFigure($el_1, val_1);
+      if (fig_2_value !== val_2) this.animateFigure($el_2, val_2);
+    }
+  };
+
+  Countdown.init();
+});
