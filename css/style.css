@@ -1066,4 +1066,22 @@ h3.marker {
 }
 
 /* 既存SCSS内の .figure, .bloc-time などはそのままでOK */
+/* 背景設定 */
+#mainimg {
+  background-image: url('../images/background1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  position: relative;
+}
+
+.countdown-bg {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
