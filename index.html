@@ -1,331 +1,282 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>第57回演奏発表会</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="第57回演奏発表会のホームページです">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/slide.css">
-  <link rel="stylesheet" href="css/inview.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ただいま準備中 — もうすぐ公開します</title>
+  <meta name="description" content="ただいま準備中です。もうしばらくお待ちください。" />
+  <style>
+    /* リセット＆ベース */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ffb86b;
+      --muted:#9aa6b2;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: "Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui, -apple-system, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1000px 600px at 10% 20%, rgba(255,184,107,0.06), transparent 8%),
+        radial-gradient(800px 500px at 90% 80%, rgba(127,255,212,0.03), transparent 10%),
+        var(--bg);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    /* カード */
+    .card{
+      width:100%;
+      max-width:920px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:32px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:24px;
+      align-items:center;
+    }
+
+    /* 左（メッセージ） */
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background: linear-gradient(135deg,var(--accent),#7fffd4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#081222;
+      font-weight:700;
+      font-size:20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5), inset 0 -6px 18px rgba(255,255,255,0.02);
+    }
+    h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:0.2px;
+    }
+    p.lead{
+      margin:10px 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    /* 右（ステータス） */
+    .status{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      text-align:center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    .loader{
+      margin:12px auto 14px;
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      position:relative;
+      display:grid;
+      place-items:center;
+      background: conic-gradient(from 220deg, rgba(255,255,255,0.06), transparent 40% 60%, rgba(255,255,255,0.04));
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+    .loader:after{
+      content:"";
+      width:46px;height:46px;border-radius:50%;background:var(--glass);display:block;
+      animation: pulse 1.8s infinite ease-in-out;
+    }
+    @keyframes pulse{
+      0%{transform:scale(1); opacity:1}
+      50%{transform:scale(0.98); opacity:0.85}
+      100%{transform:scale(1); opacity:1}
+    }
+
+    /* カウントダウン */
+    .countdown{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      font-weight:700;
+      margin-top:8px;
+      letter-spacing:0.6px;
+    }
+    .cd-item{
+      background: rgba(255,255,255,0.03);
+      padding:10px 12px;
+      border-radius:8px;
+      min-width:54px;
+      text-align:center;
+      font-size:18px;
+    }
+    .cd-label{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:6px;font-weight:600}
+
+    /* プログレスバー（任意） */
+    .bar-wrap{margin-top:14px; width:100%; background:rgba(255,255,255,0.025); height:10px;border-radius:999px; overflow:hidden}
+    .bar{height:100%; width:0%; background: linear-gradient(90deg, var(--accent), #7fffd4); transition:width 0.8s ease}
+
+    /* フッター */
+    .info{font-size:13px;color:var(--muted); margin-top:16px}
+
+    /* レスポンシブ */
+    @media (max-width:880px){
+      .card{grid-template-columns:1fr; padding:20px}
+      .status{order:-1;margin-bottom:8px}
+    }
+  </style>
 </head>
-
-
-<body class="home">
-
-<div id="container">
-
-<header>
-
-<h1 class="logo"><a href="index.html"><img src="images/logo.png" alt="第57回演奏発表会"></a></h1>
-
-<nav>
-  <ul>
-    <li><a href="index.html">ホーム</a></li>
-    <li><a href="enmoku.html">演目</a></li>
-    <li><a href="access.html">アクセス</a></li>
-    <li><a href="qanda.html">Q&A・お問い合わせ</a></li>
-    <li><a href="mascot.html">マスコット紹介</a></li>
-  </ul>
-</nav>
-
-</header>
-
-<div id="contents">
-
-<!--スライドショー-->
-<!--スライドショー部分を置き換え-->
-<!-- 背景1.jpg + カウントダウン表示 -->
-<aside id="mainimg">
-  <div class="countdown-bg">
-    <div class="wrap">
-      <h1><strong>開演まで</strong> カウントダウン</h1>
-      <div class="countdown">
-        <!-- Days -->
-        <div class="bloc-time days" data-init-value="0">
-          <span class="count-title">Days</span>
-          <div class="figure days days-1">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-          <div class="figure days days-2">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-        </div>
-
-        <!-- Hours -->
-        <div class="bloc-time hours" data-init-value="0">
-          <span class="count-title">Hours</span>
-          <div class="figure hours hours-1">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-          <div class="figure hours hours-2">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-        </div>
-
-        <!-- Minutes -->
-        <div class="bloc-time min" data-init-value="0">
-          <span class="count-title">Minutes</span>
-          <div class="figure min min-1">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-          <div class="figure min min-2">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-        </div>
-
-        <!-- Seconds -->
-        <div class="bloc-time sec" data-init-value="0">
-          <span class="count-title">Seconds</span>
-          <div class="figure sec sec-1">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
-          <div class="figure sec sec-2">
-            <span class="top">0</span>
-            <span class="top-back"><span>0</span></span>
-            <span class="bottom">0</span>
-            <span class="bottom-back"><span>0</span></span>
-          </div>
+<body>
+  <div class="card" role="main" aria-labelledby="title">
+    <div>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">待</div>
+        <div>
+          <h1 id="title">ただいま公開準備中です</h1>
+          <div style="color:var(--muted);font-size:13px">ご不便をおかけして申し訳ありません — まもなく公開予定です</div>
         </div>
       </div>
+
+      <p class="lead">
+        新しいコンテンツを準備中です。公開までもうしばらくお待ちください。<br>
+        何か急ぎのご用件があれば <a href="mailto:info@example.com" style="color:var(--accent); text-decoration:underline">info@example.com</a> までご連絡ください。
+      </p>
+
+      <!-- 任意：進捗説明 -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:160px">
+          <div style="font-size:13px;color:var(--muted)">状況</div>
+          <div style="font-weight:700;margin-top:6px">最終チェック中</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:160px">
+          <div style="font-size:13px;color:var(--muted)">お問い合わせ</div>
+          <div style="font-weight:700;margin-top:6px">メールで受付中</div>
+        </div>
+      </div>
+
+      <div class="info" aria-hidden="true">
+        ※こちらのページはテンプレートです。公開日時を設定すると自動的にカウントダウンが動きます。
+      </div>
     </div>
+
+    <aside class="status" aria-label="公開ステータス">
+      <div style="font-size:13px;color:var(--muted)">現在のステータス</div>
+      <div class="loader" aria-hidden="true"></div>
+
+      <!-- カウントダウン表示（有効なら JS が日付を埋めます） -->
+      <div id="countdown" class="countdown" aria-live="polite" style="display:none">
+        <div class="cd-item"><span id="days">00</span><span class="cd-label">日</span></div>
+        <div class="cd-item"><span id="hours">00</span><span class="cd-label">時</span></div>
+        <div class="cd-item"><span id="minutes">00</span><span class="cd-label">分</span></div>
+        <div class="cd-item"><span id="seconds">00</span><span class="cd-label">秒</span></div>
+      </div>
+
+      <!-- 進捗バー（任意：JSで動かせます） -->
+      <div class="bar-wrap" aria-hidden="true">
+        <div class="bar" id="progressBar" style="width:36%"></div>
+      </div>
+
+      <div style="margin-top:12px;font-size:13px;color:var(--muted)">公開予定: <strong id="publishText">未定</strong></div>
+    </aside>
   </div>
-</aside>
 
+  <script>
+    /**
+     * 使い方：
+     *  1) カウントダウンを使う場合は targetDate を編集：
+     *      const targetDate = new Date("2025-12-10T18:00:00+09:00");
+     *  2) カウントダウン不要なら targetDate を null にするか削除してください。
+     *
+     * 注意：タイムゾーンはブラウザ時刻に依存します（例：+09:00）。
+     */
 
+    (function(){
+      // --- ユーザーが編集する箇所 ---
+      // 公開日時をここで指定（例: "2025-12-10T18:00:00+09:00"）
+      const targetDate = new Date("2025-12-10T18:00:00+09:00");
+      // const targetDate = null; // ←カウントダウン無効にするにはこれを有効化
+      // 公開テキスト（targetDate が null のときに表示）
+      const fallbackText = "近日公開予定";
+      // --- ここまで ---
 
-<main>
+      const countdownEl = document.getElementById('countdown');
+      const publishText = document.getElementById('publishText');
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      const bar = document.getElementById('progressBar');
 
-<section>
+      function pad(n){ return String(n).padStart(2,'0') }
 
-<div class="list-free">
+      if (!targetDate || isNaN(targetDate.getTime())) {
+        // カウントダウン無効
+        publishText.textContent = fallbackText;
+        countdownEl.style.display = 'none';
+      } else {
+        publishText.textContent = targetDate.toLocaleString();
+        countdownEl.style.display = 'flex';
 
-<h2 class="w1"><span class="fade-in-text">News</span><span class="small">お知らせ</span></h2>
+        // optional: 進捗バーを開始日〜公開日の割合で表示する例（開始日を今の30日前にして割合計算）
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30); // 任意：ここを編集して開始時刻を変える
+        const totalMs = Math.max(1, targetDate - startDate);
+        function updateProgress(){
+          const now = new Date();
+          const passed = Math.max(0, Math.min(totalMs, now - startDate));
+          const pct = Math.round((passed / totalMs) * 100);
+          bar.style.width = pct + '%';
+        }
 
-<dl class="new">
-<dt>2025/10/26<span class="icon-bg1">アイコン</span></dt>
-<dd>coming soon</dd>
-<dt>2024/00/00<span class="icon-bg1">アイコン</span></dt>
-<dd>coming soon</dd>
-</dl>
+        function updateCountdown(){
+          const now = new Date();
+          let diff = targetDate - now;
+          if (diff <= 0){
+            // 公開済みの表示
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            document.querySelector('.loader').style.display = 'none';
+            publishText.textContent = "公開済み";
+            return;
+          }
+          const s = Math.floor(diff / 1000);
+          const days = Math.floor(s / 86400);
+          const hours = Math.floor((s % 86400) / 3600);
+          const minutes = Math.floor((s % 3600) / 60);
+          const seconds = s % 60;
 
-</div>
-<!--/.list-free-->
+          daysEl.textContent = pad(days);
+          hoursEl.textContent = pad(hours);
+          minutesEl.textContent = pad(minutes);
+          secondsEl.textContent = pad(seconds);
+        }
 
-</section>
+        updateCountdown();
+        updateProgress();
+        // 毎秒更新（短く）とプログレスの緩やかな更新
+        setInterval(updateCountdown, 1000);
+        setInterval(updateProgress, 3000);
+      }
 
-<section>
-
-<h2 class="dn">ギャラリー</h2>
-
-<div class="thumbnail-slide">
-<a href="#"><img src="images/1.jpg" alt=""></a>
-<a href="#"><img src="images/2.jpg" alt=""></a>
-<a href="#"><img src="images/3.jpg" alt=""></a>
-<a href="#"><img src="images/1.jpg" alt=""></a>
-<a href="#"><img src="images/2.jpg" alt=""></a>
-<a href="#"><img src="images/3.jpg" alt=""></a>
-</div>
-
-</section>
-
-<section class="bg1">
-
-<h2 class="c"><span class="fade-in-text">製品ラインナップ</span><span class="small">Product Lineup</span></h2>
-
-<div class="list-grid1">
-
-<div class="list blur">
-<figure><a href="products.html#link1"><img src="images/1.jpg" alt=""></a></figure>
-<div class="text">
-<h4>第1部</h4>
-<p>簡単な説明を入れます。サンプルテキスト。サンプルテキスト。サンプルテキスト。</p>
-</div>
-<p class="btn1"><a href="products.html#link1">詳しくみる</a></p>
-</div>
-
-<div class="list blur">
-<figure><a href="products.html#link2"><img src="images/1.jpg" alt=""></a></figure>
-<div class="text">
-<h4>第2部</h4>
-<p>簡単な説明を入れます。サンプルテキスト。サンプルテキスト。サンプルテキスト。</p>
-</div>
-<p class="btn1"><a href="products.html#link2">詳しくみる</a></p>
-</div>
-
-<div class="list blur">
-<figure><a href="products.html#link3"><img src="images/1.jpg" alt=""></a></figure>
-<div class="text">
-<h4>第3部</h4>
-<p>簡単な説明を入れます。サンプルテキスト。サンプルテキスト。サンプルテキスト。</p>
-</div>
-<p class="btn1"><a href="products.html#link3">詳しくみる</a></p>
-</div>
-
-</div>
-<!--/.list-grid1-->
-
-</section>
-
-<section>
-
-<div class="list-free">
-
-<p class="point order1 transform3 spin"><span>Point<span>1</span></span></p>
-
-<div class="text order2">
-<h3><span class="fade-in-text">洗練されたデザイン</span></h3>
-<p>sample stationeryでは、日常に彩りを添えるアイテムをお届けします。<br>
-シンプルでありながら機能性に優れたデザインは、どんなシーンにも調和し、使うたびに新たな発見と喜びをもたらします。<br>
-細部にまでこだわったデザインは、美しさと実用性を兼ね備え、あなたのライフスタイルを豊かにします。<br>
-上質な素材と卓越した技術が織りなす製品をぜひご体験ください。</p>
-<p class="btn1"><a href="concept.html">もっと見る</a></p>
-</div>
-
-<div class="image w2 order3 blur">
-<img src="images/1.jpg" alt="">
-</div>
-
-</div>
-<!--/.list-free-->
-
-<div class="list-free">
-
-<p class="point order3 transform3 spin"><span>Point<span>2</span></span></p>
-
-<div class="text order2">
-<h3 class="style1"><span class="fade-in-text">洗練されたデザイン</span></h3>
-<p>sample stationeryでは、日常に彩りを添えるアイテムをお届けします。<br>
-シンプルでありながら機能性に優れたデザインは、どんなシーンにも調和し、使うたびに新たな発見と喜びをもたらします。<br>
-細部にまでこだわったデザインは、美しさと実用性を兼ね備え、あなたのライフスタイルを豊かにします。<br>
-上質な素材と卓越した技術が織りなす製品をぜひご体験ください。</p>
-<p class="btn2"><a href="concept.html">View More</a></p>
-</div>
-
-<div class="image w2 order1 blur">
-<img src="images/1.jpg" alt="">
-</div>
-
-</div>
-<!--/.list-free-->
-
-</section>
-
-
-</main>
-
-</div>
-<!--/#contents-->
-
-<footer>
-
-<div>
-<p class="logo"><img src="images/logo_inverse.png" alt="sample stationery"></p>
-</div>
-
-<nav>
-  <ul>
-    <li><a href="index.html">ホーム</a></li>
-    <li><a href="enmoku.html">演目</a></li>
-    <li><a href="access.html">アクセス</a></li>
-    <li><a href="qanda.html">Q&A・お問い合わせ</a></li>
-    <li><a href="mascot.html">マスコット紹介</a></li>
-  </ul>
-</nav>
-
-
-<ul class="icons">
-<li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-<li><a href="#"><i class="fab fa-line"></i></a></li>
-<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-</ul>
-
-<div id="copyright">
-Copyright&copy; <a href="index.html">sample stationery</a> All Rights Reserved.
-<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-</div>
-
-</footer>
-
-</div>
-<!--/#container-->
-
-<!--開閉ボタン（ハンバーガーアイコン）-->
-<div id="menubar_hdr">
-<div class="menu-icon">
-<span></span><span></span><span></span>
-</div>
-</div>
-
-<!--開閉ブロック-->
-<div id="menubar">
-
-<p class="logo"><img src="images/logo.png" alt="sample stationery"></p>
-
-<nav>
-  <ul>
-    <li><a href="index.html">ホーム</a></li>
-    <li><a href="enmoku.html">演目</a></li>
-    <li><a href="access.html">アクセス</a></li>
-    <li><a href="qanda.html">Q&A・お問い合わせ</a></li>
-    <li><a href="mascot.html">マスコット紹介</a></li>
-  </ul>
-</nav>
-
-
-<p>ここのブロックは、htmlの下の方にある&lt;div id=&quot;menubar&quot;&gt;で編集できます。<br>
-ヘッダーのメニューとは別のブロックになるので注意して下さい。</p>
-
-</div>
-<!--/#menubar-->
-
-<!--jQueryの読み込み-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!--スライドショー（slick）-->
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="js/slick.js"></script>
-
-<!--パララックス（inview）-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
-<script src="js/jquery.inview_set.js"></script>
-
-<!--このテンプレート専用のスクリプト-->
-<script src="js/main.js"></script>
-
+      // アクセシビリティ：フォーカス可能にしてキーボードで読み上げられるようにする
+      document.querySelector('.card').setAttribute('tabindex','-1');
+    })();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
