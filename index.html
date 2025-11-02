@@ -1,117 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第57回演奏発表会 - 準備中</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>第57回演奏発表会まであと少し！</title>
+  <meta name="description" content="第57回演奏発表会まであと少しです。どうぞお楽しみに！" />
+  <style>
+    :root{
+      --main-bg:#fff7fa;
+      --accent:#f7a8c4;
+      --accent-dark:#e26fa3;
+      --text:#444;
+      --muted:#777;
+      --card-bg:#ffffffcc;
+      --shadow:0 6px 20px rgba(0,0,0,0.1);
+      font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:linear-gradient(180deg, var(--main-bg), #fff);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+    }
+    .container{
+      max-width:640px;
+      background:var(--card-bg);
+      padding:40px 28px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
 
-<style>
-  body {
-    font-family: 'Lato', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-    background: #fff;
-    color: #b30059; /* 赤みのあるピンク */
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
+    .notice{
+      background:var(--accent);
+      color:white;
+      font-weight:bold;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:20px;
+      font-size:15px;
+    }
 
-  .container {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 800px;
-    margin: auto;
-    padding: 40px 20px;
-  }
+    h1{
+      font-size:22px;
+      margin-bottom:8px;
+      color:var(--accent-dark);
+    }
 
-  h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    font-weight: 700;
-    color: #b30059;
-  }
+    .lead{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+      margin-bottom:24px;
+    }
 
-  .subtitle {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    color: #d63384;
-  }
+    .countdown{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin:18px 0 24px;
+      flex-wrap:wrap;
+    }
 
-  .countdown {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 2em;
-    font-weight: bold;
-  }
+    .cd-item{
+      background:#ffe6ef;
+      padding:14px 18px;
+      border-radius:10px;
+      min-width:72px;
+      border:2px solid #fdd0df;
+    }
 
-  .countdown span.label {
-    font-size: 1em;
-    margin-right: 10px;
-    color: #b30059;
-  }
+    .cd-item span{display:block;}
+    .cd-number{
+      font-size:26px;
+      font-weight:bold;
+      color:var(--accent-dark);
+    }
+    .cd-label{
+      font-size:12px;
+      color:var(--muted);
+    }
 
-  .contact {
-    margin-top: 40px;
-    font-size: 1em;
-    color: #333;
-  }
+    a.button{
+      display:inline-block;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      padding:10px 24px;
+      border-radius:8px;
+      transition:background 0.2s;
+    }
+    a.button:hover{
+      background:var(--accent-dark);
+    }
 
-  .contact a {
-    color: #b30059;
-    font-weight: bold;
-    text-decoration: none;
-  }
+    .footer{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:24px;
+    }
 
-  .contact a:hover {
-    text-decoration: underline;
-  }
-</style>
+    @media (max-width:480px){
+      h1{font-size:20px;}
+      .cd-number{font-size:22px;}
+    }
+  </style>
 </head>
-
 <body>
   <div class="container">
-    <h1>ホームページ編集中</h1>
-    <p class="subtitle">第57回演奏発表会まであと</p>
+    <div class="notice">🌸 現在ホームページ編集中です 🌸</div>
+
+    <h1>第57回 演奏発表会まであと</h1>
+
     <div class="countdown">
-      <span id="days">00</span><span class="label">日</span>
-      <span id="hours">00</span><span class="label">時間</span>
-      <span id="minutes">00</span><span class="label">分</span>
-      <span id="seconds">00</span><span class="label">秒</span>
+      <div class="cd-item">
+        <span id="days" class="cd-number">00</span>
+        <span class="cd-label">日</span>
+      </div>
+      <div class="cd-item">
+        <span id="hours" class="cd-number">00</span>
+        <span class="cd-label">時間</span>
+      </div>
+      <div class="cd-item">
+        <span id="minutes" class="cd-number">00</span>
+        <span class="cd-label">分</span>
+      </div>
+      <div class="cd-item">
+        <span id="seconds" class="cd-number">00</span>
+        <span class="cd-label">秒</span>
+      </div>
     </div>
-    <p class="contact">
-      お問い合わせは 
-      <a href="https://forms.gle/BUat9GAPhtWcFU3E9" target="_blank">こちらのフォーム</a> からお願いします。
+
+    <p class="lead">
+      第57回演奏発表会は <strong>2025年12月14日（日）17:00 開演</strong> です。<br>
+      当日をどうぞお楽しみに！
     </p>
+
+    <a href="https://forms.gle/BUat9GAPhtWcFU3E9" target="_blank" class="button">
+      お問い合わせはこちら
+    </a>
+
+    <div class="footer">
+      © 2025 演奏発表会実行委員会
+    </div>
   </div>
 
   <script>
-    const targetDate = new Date("2025-12-14T17:00:00+09:00").getTime();
+    // ===== カウントダウン設定 =====
+    const targetDate = new Date("2025-12-14T17:00:00+09:00");
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
 
-      if (distance < 0) {
-        document.querySelector(".countdown").innerHTML = "本番当日です！";
+    function pad(num){ return String(num).padStart(2, '0'); }
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if(diff <= 0){
+        document.querySelector('.container').innerHTML =
+          '<div class="notice">🌸 現在ホームページ編集中です 🌸</div>' +
+          '<h1>第57回 演奏発表会は本日開催！</h1>' +
+          '<p class="lead">ご来場をお待ちしております。</p>';
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const s = Math.floor(diff / 1000);
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
 
-      document.getElementById("days").textContent = days.toString().padStart(2, "0");
-      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
-      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+      daysEl.textContent = pad(d);
+      hoursEl.textContent = pad(h);
+      minutesEl.textContent = pad(m);
+      secondsEl.textContent = pad(sec);
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
