@@ -7,15 +7,19 @@
   <meta name="description" content="第57回演奏発表会まであと少しです。どうぞお楽しみに！" />
   <style>
     :root{
-      --bg:#0f1724;
-      --accent:#ffb86b;
-      --muted:#9aa6b2;
+      --main-bg:#fff7fa;
+      --accent:#f7a8c4;
+      --accent-dark:#e26fa3;
+      --text:#444;
+      --muted:#777;
+      --card-bg:#ffffffcc;
+      --shadow:0 6px 20px rgba(0,0,0,0.1);
       font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
-      background:radial-gradient(800px 500px at 80% 10%,rgba(255,184,107,0.05),transparent 50%),var(--bg);
-      color:#e6eef6;
+      background:linear-gradient(180deg, var(--main-bg), #fff);
+      color:var(--text);
       min-height:100vh;
       display:flex;
       align-items:center;
@@ -24,67 +28,93 @@
       padding:24px;
     }
     .container{
-      max-width:600px;
-      background:rgba(255,255,255,0.05);
+      max-width:640px;
+      background:var(--card-bg);
       padding:40px 28px;
-      border-radius:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+      border-radius:20px;
+      box-shadow:var(--shadow);
     }
+
+    .notice{
+      background:var(--accent);
+      color:white;
+      font-weight:bold;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:20px;
+      font-size:15px;
+    }
+
     h1{
       font-size:22px;
       margin-bottom:8px;
+      color:var(--accent-dark);
     }
+
     .lead{
       color:var(--muted);
       font-size:15px;
       line-height:1.7;
       margin-bottom:24px;
     }
+
     .countdown{
       display:flex;
       justify-content:center;
       gap:12px;
       margin:18px 0 24px;
+      flex-wrap:wrap;
     }
+
     .cd-item{
-      background:rgba(255,255,255,0.1);
+      background:#ffe6ef;
       padding:14px 18px;
       border-radius:10px;
       min-width:72px;
+      border:2px solid #fdd0df;
     }
-    .cd-item span{
-      display:block;
-    }
+
+    .cd-item span{display:block;}
     .cd-number{
       font-size:26px;
       font-weight:bold;
+      color:var(--accent-dark);
     }
     .cd-label{
       font-size:12px;
       color:var(--muted);
     }
+
     a.button{
       display:inline-block;
       background:var(--accent);
-      color:#000;
+      color:#fff;
       text-decoration:none;
       font-weight:bold;
-      padding:10px 20px;
+      padding:10px 24px;
       border-radius:8px;
       transition:background 0.2s;
     }
     a.button:hover{
-      background:#ffd29b;
+      background:var(--accent-dark);
     }
+
     .footer{
       color:var(--muted);
       font-size:12px;
       margin-top:24px;
     }
+
+    @media (max-width:480px){
+      h1{font-size:20px;}
+      .cd-number{font-size:22px;}
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="notice">🌸 現在ホームページ編集中です 🌸</div>
+
     <h1>第57回 演奏発表会まであと</h1>
 
     <div class="countdown">
@@ -137,7 +167,9 @@
 
       if(diff <= 0){
         document.querySelector('.container').innerHTML =
-          '<h1>第57回 演奏発表会は本日開催！</h1><p class="lead">ご来場をお待ちしております。</p>';
+          '<div class="notice">🌸 現在ホームページ編集中です 🌸</div>' +
+          '<h1>第57回 演奏発表会は本日開催！</h1>' +
+          '<p class="lead">ご来場をお待ちしております。</p>';
         return;
       }
 
