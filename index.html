@@ -3,280 +3,158 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ただいま準備中 — もうすぐ公開します</title>
-  <meta name="description" content="ただいま準備中です。もうしばらくお待ちください。" />
+  <title>第57回演奏発表会まであと少し！</title>
+  <meta name="description" content="第57回演奏発表会まであと少しです。どうぞお楽しみに！" />
   <style>
-    /* リセット＆ベース */
     :root{
       --bg:#0f1724;
-      --card:#0b1220;
       --accent:#ffb86b;
       --muted:#9aa6b2;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      font-family: "Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui, -apple-system, "Helvetica Neue", Arial;
+      font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0;
-      background:
-        radial-gradient(1000px 600px at 10% 20%, rgba(255,184,107,0.06), transparent 8%),
-        radial-gradient(800px 500px at 90% 80%, rgba(127,255,212,0.03), transparent 10%),
-        var(--bg);
+      background:radial-gradient(800px 500px at 80% 10%,rgba(255,184,107,0.05),transparent 50%),var(--bg);
       color:#e6eef6;
-      -webkit-font-smoothing:antialiased;
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
+      text-align:center;
       padding:24px;
     }
-
-    /* カード */
-    .card{
-      width:100%;
-      max-width:920px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius:var(--radius);
-      padding:32px;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:24px;
-      align-items:center;
-    }
-
-    /* 左（メッセージ） */
-    .brand{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      margin-bottom:6px;
-    }
-    .logo{
-      width:56px;
-      height:56px;
-      border-radius:12px;
-      background: linear-gradient(135deg,var(--accent),#7fffd4);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#081222;
-      font-weight:700;
-      font-size:20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.5), inset 0 -6px 18px rgba(255,255,255,0.02);
+    .container{
+      max-width:600px;
+      background:rgba(255,255,255,0.05);
+      padding:40px 28px;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
     }
     h1{
-      margin:0;
-      font-size:20px;
-      letter-spacing:0.2px;
+      font-size:22px;
+      margin-bottom:8px;
     }
-    p.lead{
-      margin:10px 0 18px;
+    .lead{
       color:var(--muted);
-      line-height:1.6;
+      font-size:15px;
+      line-height:1.7;
+      margin-bottom:24px;
     }
-
-    /* 右（ステータス） */
-    .status{
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-      border-radius:12px;
-      padding:18px;
-      text-align:center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-    .loader{
-      margin:12px auto 14px;
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      position:relative;
-      display:grid;
-      place-items:center;
-      background: conic-gradient(from 220deg, rgba(255,255,255,0.06), transparent 40% 60%, rgba(255,255,255,0.04));
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    }
-    .loader:after{
-      content:"";
-      width:46px;height:46px;border-radius:50%;background:var(--glass);display:block;
-      animation: pulse 1.8s infinite ease-in-out;
-    }
-    @keyframes pulse{
-      0%{transform:scale(1); opacity:1}
-      50%{transform:scale(0.98); opacity:0.85}
-      100%{transform:scale(1); opacity:1}
-    }
-
-    /* カウントダウン */
     .countdown{
       display:flex;
-      gap:10px;
       justify-content:center;
-      font-weight:700;
-      margin-top:8px;
-      letter-spacing:0.6px;
+      gap:12px;
+      margin:18px 0 24px;
     }
     .cd-item{
-      background: rgba(255,255,255,0.03);
-      padding:10px 12px;
-      border-radius:8px;
-      min-width:54px;
-      text-align:center;
-      font-size:18px;
+      background:rgba(255,255,255,0.1);
+      padding:14px 18px;
+      border-radius:10px;
+      min-width:72px;
     }
-    .cd-label{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:6px;font-weight:600}
-
-    /* プログレスバー（任意） */
-    .bar-wrap{margin-top:14px; width:100%; background:rgba(255,255,255,0.025); height:10px;border-radius:999px; overflow:hidden}
-    .bar{height:100%; width:0%; background: linear-gradient(90deg, var(--accent), #7fffd4); transition:width 0.8s ease}
-
-    /* フッター */
-    .info{font-size:13px;color:var(--muted); margin-top:16px}
-
-    /* レスポンシブ */
-    @media (max-width:880px){
-      .card{grid-template-columns:1fr; padding:20px}
-      .status{order:-1;margin-bottom:8px}
+    .cd-item span{
+      display:block;
+    }
+    .cd-number{
+      font-size:26px;
+      font-weight:bold;
+    }
+    .cd-label{
+      font-size:12px;
+      color:var(--muted);
+    }
+    a.button{
+      display:inline-block;
+      background:var(--accent);
+      color:#000;
+      text-decoration:none;
+      font-weight:bold;
+      padding:10px 20px;
+      border-radius:8px;
+      transition:background 0.2s;
+    }
+    a.button:hover{
+      background:#ffd29b;
+    }
+    .footer{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:24px;
     }
   </style>
 </head>
 <body>
-  <div class="card" role="main" aria-labelledby="title">
-    <div>
-      <div class="brand">
-        <div class="logo" aria-hidden="true">待</div>
-        <div>
-          <h1 id="title">ただいま公開準備中です</h1>
-          <div style="color:var(--muted);font-size:13px">ご不便をおかけして申し訳ありません — まもなく公開予定です</div>
-        </div>
+  <div class="container">
+    <h1>第57回 演奏発表会まであと</h1>
+
+    <div class="countdown">
+      <div class="cd-item">
+        <span id="days" class="cd-number">00</span>
+        <span class="cd-label">日</span>
       </div>
-
-      <p class="lead">
-        新しいコンテンツを準備中です。公開までもうしばらくお待ちください。<br>
-        何か急ぎのご用件があれば <a href="mailto:info@example.com" style="color:var(--accent); text-decoration:underline">info@example.com</a> までご連絡ください。
-      </p>
-
-      <!-- 任意：進捗説明 -->
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:160px">
-          <div style="font-size:13px;color:var(--muted)">状況</div>
-          <div style="font-weight:700;margin-top:6px">最終チェック中</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:160px">
-          <div style="font-size:13px;color:var(--muted)">お問い合わせ</div>
-          <div style="font-weight:700;margin-top:6px">メールで受付中</div>
-        </div>
+      <div class="cd-item">
+        <span id="hours" class="cd-number">00</span>
+        <span class="cd-label">時間</span>
       </div>
-
-      <div class="info" aria-hidden="true">
-        ※こちらのページはテンプレートです。公開日時を設定すると自動的にカウントダウンが動きます。
+      <div class="cd-item">
+        <span id="minutes" class="cd-number">00</span>
+        <span class="cd-label">分</span>
+      </div>
+      <div class="cd-item">
+        <span id="seconds" class="cd-number">00</span>
+        <span class="cd-label">秒</span>
       </div>
     </div>
 
-    <aside class="status" aria-label="公開ステータス">
-      <div style="font-size:13px;color:var(--muted)">現在のステータス</div>
-      <div class="loader" aria-hidden="true"></div>
+    <p class="lead">
+      第57回演奏発表会は <strong>2025年12月14日（日）17:00 開演</strong> です。<br>
+      当日をどうぞお楽しみに！
+    </p>
 
-      <!-- カウントダウン表示（有効なら JS が日付を埋めます） -->
-      <div id="countdown" class="countdown" aria-live="polite" style="display:none">
-        <div class="cd-item"><span id="days">00</span><span class="cd-label">日</span></div>
-        <div class="cd-item"><span id="hours">00</span><span class="cd-label">時</span></div>
-        <div class="cd-item"><span id="minutes">00</span><span class="cd-label">分</span></div>
-        <div class="cd-item"><span id="seconds">00</span><span class="cd-label">秒</span></div>
-      </div>
+    <a href="https://forms.gle/BUat9GAPhtWcFU3E9" target="_blank" class="button">
+      お問い合わせはこちら
+    </a>
 
-      <!-- 進捗バー（任意：JSで動かせます） -->
-      <div class="bar-wrap" aria-hidden="true">
-        <div class="bar" id="progressBar" style="width:36%"></div>
-      </div>
-
-      <div style="margin-top:12px;font-size:13px;color:var(--muted)">公開予定: <strong id="publishText">未定</strong></div>
-    </aside>
+    <div class="footer">
+      © 2025 演奏発表会実行委員会
+    </div>
   </div>
 
   <script>
-    /**
-     * 使い方：
-     *  1) カウントダウンを使う場合は targetDate を編集：
-     *      const targetDate = new Date("2025-12-10T18:00:00+09:00");
-     *  2) カウントダウン不要なら targetDate を null にするか削除してください。
-     *
-     * 注意：タイムゾーンはブラウザ時刻に依存します（例：+09:00）。
-     */
+    // ===== カウントダウン設定 =====
+    const targetDate = new Date("2025-12-14T17:00:00+09:00");
 
-    (function(){
-      // --- ユーザーが編集する箇所 ---
-      // 公開日時をここで指定（例: "2025-12-10T18:00:00+09:00"）
-      const targetDate = new Date("2025-12-10T18:00:00+09:00");
-      // const targetDate = null; // ←カウントダウン無効にするにはこれを有効化
-      // 公開テキスト（targetDate が null のときに表示）
-      const fallbackText = "近日公開予定";
-      // --- ここまで ---
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
 
-      const countdownEl = document.getElementById('countdown');
-      const publishText = document.getElementById('publishText');
-      const daysEl = document.getElementById('days');
-      const hoursEl = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-      const secondsEl = document.getElementById('seconds');
-      const bar = document.getElementById('progressBar');
+    function pad(num){ return String(num).padStart(2, '0'); }
 
-      function pad(n){ return String(n).padStart(2,'0') }
+    function updateCountdown(){
+      const now = new Date();
+      const diff = targetDate - now;
 
-      if (!targetDate || isNaN(targetDate.getTime())) {
-        // カウントダウン無効
-        publishText.textContent = fallbackText;
-        countdownEl.style.display = 'none';
-      } else {
-        publishText.textContent = targetDate.toLocaleString();
-        countdownEl.style.display = 'flex';
-
-        // optional: 進捗バーを開始日〜公開日の割合で表示する例（開始日を今の30日前にして割合計算）
-        const startDate = new Date();
-        startDate.setDate(startDate.getDate() - 30); // 任意：ここを編集して開始時刻を変える
-        const totalMs = Math.max(1, targetDate - startDate);
-        function updateProgress(){
-          const now = new Date();
-          const passed = Math.max(0, Math.min(totalMs, now - startDate));
-          const pct = Math.round((passed / totalMs) * 100);
-          bar.style.width = pct + '%';
-        }
-
-        function updateCountdown(){
-          const now = new Date();
-          let diff = targetDate - now;
-          if (diff <= 0){
-            // 公開済みの表示
-            daysEl.textContent = '00';
-            hoursEl.textContent = '00';
-            minutesEl.textContent = '00';
-            secondsEl.textContent = '00';
-            document.querySelector('.loader').style.display = 'none';
-            publishText.textContent = "公開済み";
-            return;
-          }
-          const s = Math.floor(diff / 1000);
-          const days = Math.floor(s / 86400);
-          const hours = Math.floor((s % 86400) / 3600);
-          const minutes = Math.floor((s % 3600) / 60);
-          const seconds = s % 60;
-
-          daysEl.textContent = pad(days);
-          hoursEl.textContent = pad(hours);
-          minutesEl.textContent = pad(minutes);
-          secondsEl.textContent = pad(seconds);
-        }
-
-        updateCountdown();
-        updateProgress();
-        // 毎秒更新（短く）とプログレスの緩やかな更新
-        setInterval(updateCountdown, 1000);
-        setInterval(updateProgress, 3000);
+      if(diff <= 0){
+        document.querySelector('.container').innerHTML =
+          '<h1>第57回 演奏発表会は本日開催！</h1><p class="lead">ご来場をお待ちしております。</p>';
+        return;
       }
 
-      // アクセシビリティ：フォーカス可能にしてキーボードで読み上げられるようにする
-      document.querySelector('.card').setAttribute('tabindex','-1');
-    })();
+      const s = Math.floor(diff / 1000);
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+
+      daysEl.textContent = pad(d);
+      hoursEl.textContent = pad(h);
+      minutesEl.textContent = pad(m);
+      secondsEl.textContent = pad(sec);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
