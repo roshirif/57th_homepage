@@ -10,6 +10,7 @@ function handleTickInit(tick) {
   };
 
   counter.onended = function() {
-    document.body.innerHTML = "<h1>🎶 演奏発表会 開演！</h1>";
+    // 今の画面を消さずに、bodyの一番最後に文字を追加する
+    document.body.insertAdjacentHTML('beforeend', '<h1>🎶 演奏発表会 開演！</h1>');
   };
 }
